@@ -1,0 +1,97 @@
+/* function contadorWhile(numero1, numero2) {
+
+    let contador = 1
+    let soma = 0
+
+    while (contador <= numero2) {
+
+        soma = numero1 + contador
+        console.log(soma)
+        contador++
+    }
+
+}
+
+function contadorFor(numero1, numero2) {
+    for ( contador = 0; contador < numero2; contador++ ){
+        let soma = numero1 + contador
+        console.log(soma)
+        if ( soma == 3) {
+            console.log(`Chegamos no número ${soma}`)
+        }else if ( soma == 4) {
+            console.log(`Chegamos no número ${soma}`)
+        }else{
+            console.log(`somei`)
+        }
+    }
+
+}
+
+contadorFor(1, 5)
+console.log(this)
+
+
+let numeros = [1, 2, 3, 4, 5, 6]
+
+numeros.map(numero => {
+    console.log(numero)
+})
+
+let pesquisa = numeros.find(numero => numero === 4)
+
+console.log(pesquisa)
+*/
+
+let usuarios = [
+
+    {
+        nome: 'Breno',
+        sobrenome: 'Novais',
+        idade: 28
+    },
+
+    {
+        nome: 'Nicolas',
+        sobrenome: "serge",
+        idade: 28
+    },
+
+    {
+        nome: 'Bruno',
+        sobrenome: 'vinicius',
+        idade: 30
+    }
+]
+
+/* let findOneUser = usuarios.find(usuario => usuario.idade === 28)
+console.log(findOneUser)
+*/
+
+let findAllUser = []
+
+/* usuarios.map
+ mapeando usuarios elemento por elemento da array usuarios
+
+ (usuario, index)
+elemento da vez, posição do mesmo no array 
+
+ => {}
+ retorno da function
+*/
+
+usuarios.map((usuario, index) => {a
+    if (usuario.idade === 30) {
+
+        console.log(index)
+
+        findAllUser.push(usuario)
+    }
+})
+
+
+
+
+
+
+
+console.log(findAllUser)
