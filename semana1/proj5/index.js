@@ -3,12 +3,13 @@ import logins from "./usuarios.js";
 /*
 logins.map((login, index)=> {
     logins[index] = {...login, usuario: login.email.slice(0, login.email.indexOf("@"))}
-
 })
 //console.log(logins)
 */
 
+// Mapeando o array
 const newUser = logins.map(login => ({
+    //criando uma nova chave com o valor sendo o uma parte de outra chave separada com split
     ...login,
      usuario: login.email.split("@")[0]
 }))

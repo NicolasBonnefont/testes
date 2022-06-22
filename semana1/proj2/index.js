@@ -4,6 +4,8 @@ const usersLogados = []
 const usersDeslogados = []
 
 Usuarios.map(usuario => {
+    /* // if tamanho da senha for maior que 8 e a idade do usuario maior que 27
+    adiciona a chave logado com valor true */
     if (usuario.senha.length > 8 && usuario.idade > 27) {
         usersLogados.push({
             ...usuario,
@@ -11,7 +13,7 @@ Usuarios.map(usuario => {
         })
 
         console.log(usuario.nome + ": logado")
-
+        /* else adiciona a chave logado com valor false     */ 
     } else {
         usersDeslogados.push({
             ...usuario,
@@ -22,6 +24,7 @@ Usuarios.map(usuario => {
     }
 })
 
+ // criando um novo array adicionando o conteudo dos outros 2
 const reunidos = [... usersLogados, ...usersDeslogados]
 
 
