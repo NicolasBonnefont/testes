@@ -12,9 +12,10 @@ Usuarios.filter(usuario => usuario.logado === true &&
 )
 */
 
-let senhaNova = Usuarios.filter(usuario => usuario.logado === true).map(usuario => ({
-    ...usuario,
+let senhaNova = Usuarios.filter(usuario => usuario.logado === true).map(() => ({
     senhaNova: Math.floor(Math.random()* 9)
 }))
+
+
 
 console.log(senhaNova)
