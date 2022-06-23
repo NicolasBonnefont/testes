@@ -1,103 +1,99 @@
 import express from "express"
+import usuarios from "./usuarios.js"
 
 // Variavel app recebe a function express()
 const app = express()
 
-//middleware, transforma tudo que recebe em json
+/* middleware, transforma tudo que recebe em json
+Obrigatório! Força toda aplicação usar o .json { "exemplo": "exemplo"} */
 app.use(express.json())
 
-const usuarios = [{
-        id: 1,
-        nome: "breno",
-        sobrenome: "novais",
-        email: "brenovais@gmail.com"
-    },
+// Boas vindas // utilizando a function get com o parametro "/" que é 
 
-    {
-        id: 2,
-        nome: "bruno",
-        sobrenome: "vinicius",
-        email: "bruvais@gmail.com"
-    },
-
-    {
-        id: 3,
-        nome: "Nioox",
-        sobrenome: "serge",
-        email: "brenovais@gmail.com"
-    }
-]
-
-// utilizando a function get com o parametro "/" que é 
 app.get("/", (req, res) => {
-    res.json({
-        message: "Hello World"
-    })
+    // no GET, não existe corpo de requisição
+    res.json(
+        usuarios
+    )
 })
 
-// pega na rota usuarios.
-app.get("/usuarios", (req, res) => {
+// Gravar usuario // coloca na rota usuarios.
+app.post("/usuarios/", (req, res) => {
+
+    const newUser = req.body
+
+    const pesquisaUsuario = usuarios.find(usuario =>
+
+        String(usuario.nome).toLocaleLowerCase() === String(newUser.nome).toLocaleLowerCase() ||
+        usuario.email === newUser.email)
+
+    if (pesquisaUsuario) {
+
+        return res.status(400).json()
+    }
+
+    usuarios.push(newUser)
 
 
     res.json(usuarios)
-})
-
-app.get("/usuarios/:id", (req, res) => {
-
-    let usuario = usuarios.find(usuario => usuario.id == req.params.id)
-
-    if (!usuario) {
-
-        return res.json({
-            "message": "Usuario não encontrado!"
-        })
-    }
-
-    res.json(usuario)
 
 })
 
-// coloca na rota usuarios.
-app.post("/usuarios", (req, res) => {
+// Alterar usuario // altera na rota usuarios/:id
 
-    const goku = req.body
-
-    console.log(goku)
-
-    res.json({
-        message: "Usuario salvo com sucesso!"
-    })
-})
-
-// altera na rota usuarios
-
-// :id e o parametro da rota, retornado qndo chamado o params
 app.put("/usuarios/:id", (req, res) => {
 
-    const userID = req.params.id
-    const dadosUsuario = req.body
-
-    const index = usuarios.findIndex(user => user.id == userID)
+    const index = usuarios.findIndex(login => login.id == req.params.id)
 
     if (index === -1) {
 
-        return res.json({
-            message: "Usuario não encontrado"
-        })
-    }
-    usuarios[index] = {
-        ...usuarios[index],
-        ...dadosUsuario
+        return res.status(404).send()
+
     }
 
-    res.json({
-        usuarios,
-        message: "Usuario alterado com sucesso!"
-    })
+    const novoDado = usuarios.filter((user, index) => user.id == req.params.id && (
+            usuarios[index] = {
+                ...usuarios[index],
+                ...req.body
+            })
+
+    )
+
+    res.json(usuarios)
+
+})
+
+// Solicitar usuario
+app.get("/usuarios/:id", (req, res) => {
+
+    const usuarioId = usuarios.find(usuario => usuario.id == req.params.id)
+
+    // se usuarioId for undefined
+    if (!usuarioId) {
+
+        return res.status(400).send()
+    }
+
+    res.json(usuarioId)
+})
+
+// Deletar usuario
+app.delete("/usuarios/:id", (req, res) => {
+
+    const userID = usuarios.findIndex(usuario => usuario.id == req.params.id)
+
+    if (userID === -1) {
+        // 404 = not found
+        return res.status(404).send()
+    }
+    
+    usuarios.splice(userID, 1)
+
+    res.json(usuarios).send
 })
 
 
 // Ouvindo a porta 3000
 app.listen(3000, () => {
-    console.log(`Servidor aberto na porta ${3000}`)
+    console.log("Server Open")
 })
