@@ -82,7 +82,7 @@ class Usuarios {
             email: req.body.email
         }
 
-        console.log(usuarios)
+    
         return res.json({
             "message": "email alterado"
         })
@@ -102,8 +102,6 @@ class Usuarios {
         }
 
         usuarios.splice(buscaUsuario, 1)
-
-        console.log(usuarios)
 
         return res.json({
             "message": "usuario excluido"
