@@ -1,4 +1,4 @@
-import UsuarioTypes from "../@types/UsuarioTypes"
+import UsuarioTypes from "./@types/UsuarioTypes"
 
 export const Usuarios: UsuarioTypes[] = [ {
     id: "1",

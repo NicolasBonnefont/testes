@@ -9,14 +9,18 @@ class LoginController {
             const { email, senha } = req.body
 
             if (email === "brenovais@brenovais.com" && senha === "brenovais") {
-                jwt.sign({id: "1", nome: "Breno"}, "123456", (err, token) => {
+                jwt.sign({ id: "1", nome: "Breno" }, "123456", (err: any, token: any) => {
 
-                    if(err) {
+                    if (err) {
                         return res.status(401).json(err)
                     }
 
                     return res.json(token)
 
+                })
+            } else {
+                return res.status(400).json({
+                    Mensagem: 'Email ou senha invalidos'
                 })
             }
 

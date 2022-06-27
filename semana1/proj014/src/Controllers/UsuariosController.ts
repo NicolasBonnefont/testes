@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import UsuarioTypes from "../../@types/UsuarioTypes";
+import UsuarioTypes from "../@types/UsuarioTypes";
 import Usuarios from "../usuarios";
 import { v4 as uuidv4 } from 'uuid';
 
